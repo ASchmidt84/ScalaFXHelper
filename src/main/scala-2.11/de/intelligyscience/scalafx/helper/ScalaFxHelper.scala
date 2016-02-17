@@ -37,36 +37,36 @@ object ScalaFxHelper {
     tmp
   }
 
-  lazy val iconNodeQubic      = (size: Int) => iconNode(size)(size) _
-  lazy val iconByteNodeQubic  = (size: Int) => iconByteNode(size)(size) _
+  lazy val iconNodeQubic      = (size: Int) => iconNode(size)(size)(_)
+  lazy val iconByteNodeQubic  = (size: Int) => iconByteNode(size)(size)(_)
 
-  lazy val iconNode8    = iconNodeQubic(8) _
-  lazy val iconNode16   = iconNodeQubic(16) _
-  lazy val iconNode24   = iconNodeQubic(24) _
-  lazy val iconNode32   = iconNodeQubic(32) _
-  lazy val iconNode40   = iconNodeQubic(40) _
-  lazy val iconNode48   = iconNodeQubic(48) _
-  lazy val iconNode56   = iconNodeQubic(56) _
-  lazy val iconNode64   = iconNodeQubic(64) _
-  lazy val iconNode72   = iconNodeQubic(72) _
-  lazy val iconNode80   = iconNodeQubic(80) _
-  lazy val iconNode128  = iconNodeQubic(128) _
-  lazy val iconNode256  = iconNodeQubic(256) _
-  lazy val iconNode512  = iconNodeQubic(512) _
+  lazy val iconNode8    = iconNodeQubic(8)(_)
+  lazy val iconNode16   = iconNodeQubic(16)(_)
+  lazy val iconNode24   = iconNodeQubic(24)(_)
+  lazy val iconNode32   = iconNodeQubic(32)(_)
+  lazy val iconNode40   = iconNodeQubic(40)(_)
+  lazy val iconNode48   = iconNodeQubic(48)(_)
+  lazy val iconNode56   = iconNodeQubic(56)(_)
+  lazy val iconNode64   = iconNodeQubic(64)(_)
+  lazy val iconNode72   = iconNodeQubic(72)(_)
+  lazy val iconNode80   = iconNodeQubic(80)(_)
+  lazy val iconNode128  = iconNodeQubic(128)(_)
+  lazy val iconNode256  = iconNodeQubic(256)(_)
+  lazy val iconNode512  = iconNodeQubic(512)(_)
 
-  lazy val iconByteNode8    = iconByteNodeQubic(8) _
-  lazy val iconByteNode16   = iconByteNodeQubic(16) _
-  lazy val iconByteNode24   = iconByteNodeQubic(24) _
-  lazy val iconByteNode32   = iconByteNodeQubic(32) _
-  lazy val iconByteNode40   = iconByteNodeQubic(40) _
-  lazy val iconByteNode48   = iconByteNodeQubic(48) _
-  lazy val iconByteNode56   = iconByteNodeQubic(56) _
-  lazy val iconByteNode64   = iconByteNodeQubic(64) _
-  lazy val iconByteNode72   = iconByteNodeQubic(72) _
-  lazy val iconByteNode80   = iconByteNodeQubic(80) _
-  lazy val iconByteNode128  = iconByteNodeQubic(128) _
-  lazy val iconByteNode256  = iconByteNodeQubic(256) _
-  lazy val iconByteNode512  = iconByteNodeQubic(512) _
+  lazy val iconByteNode8    = iconByteNodeQubic(8)(_)
+  lazy val iconByteNode16   = iconByteNodeQubic(16)(_)
+  lazy val iconByteNode24   = iconByteNodeQubic(24)(_)
+  lazy val iconByteNode32   = iconByteNodeQubic(32)(_)
+  lazy val iconByteNode40   = iconByteNodeQubic(40)(_)
+  lazy val iconByteNode48   = iconByteNodeQubic(48)(_)
+  lazy val iconByteNode56   = iconByteNodeQubic(56)(_)
+  lazy val iconByteNode64   = iconByteNodeQubic(64)(_)
+  lazy val iconByteNode72   = iconByteNodeQubic(72)(_)
+  lazy val iconByteNode80   = iconByteNodeQubic(80)(_)
+  lazy val iconByteNode128  = iconByteNodeQubic(128)(_)
+  lazy val iconByteNode256  = iconByteNodeQubic(256)(_)
+  lazy val iconByteNode512  = iconByteNodeQubic(512)(_)
 
   lazy val label = (marginTop: Int) => (marginLeft: Int) => (marginRight: Int) => (marginBottom: Int) => (title: String) => {
     val lbl = new Label(title)
@@ -81,11 +81,11 @@ object ScalaFxHelper {
     field
   }
 
-  lazy val labelSymmetric = (insets: Int) => label(insets)(insets)(insets)(insets)_
-  lazy val textFieldSymmetric = (insets: Int) => textField(insets)(insets)(insets)(insets)_
-  lazy val label10 = labelSymmetric(10)_
-  lazy val label20 = labelSymmetric(20)_
-  lazy val textField10 = textFieldSymmetric(10) _
-  lazy val textField20 = textFieldSymmetric(20) _
+  lazy val labelSymmetric = (insets: Int) => label(insets)(insets)(insets)(insets)(_)
+  lazy val textFieldSymmetric = (insets: Int) => textField(insets)(insets)(insets)(insets)(_)
+  lazy val label10 = labelSymmetric(10)(_)
+  lazy val label20 = labelSymmetric(20)(_)
+  lazy val textField10 = textFieldSymmetric(10)(_)
+  lazy val textField20 = textFieldSymmetric(20)(_)
 
 }

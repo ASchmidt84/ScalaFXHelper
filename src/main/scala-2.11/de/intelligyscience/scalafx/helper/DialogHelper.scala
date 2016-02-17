@@ -118,9 +118,9 @@ object DialogHelper {
   }
 
   lazy val dialogButton = (buttonData: ButtonData) => (text: String) => new ButtonType(text,buttonData)
-  lazy val standardDialogButton = dialogButton(ButtonData.Other) _
-  lazy val okDialogButton = dialogButton(ButtonData.OKDone) _
-  lazy val abortDialogButton = dialogButton(ButtonData.CancelClose) _
+  lazy val standardDialogButton = dialogButton(ButtonData.Other)(_)
+  lazy val okDialogButton = dialogButton(ButtonData.OKDone)(_)
+  lazy val abortDialogButton = dialogButton(ButtonData.CancelClose)(_)
 
   def safeButton(msgKey: String = "Speichern")= new ButtonType(msgKey,ButtonData.OKDone)
 
