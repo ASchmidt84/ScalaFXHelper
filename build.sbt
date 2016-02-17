@@ -1,6 +1,6 @@
 name := "ScalaFXHelper"
 
-version := "1.0"
+version := "1.1"
 
 scalaVersion := "2.11.7"
 
@@ -14,6 +14,7 @@ addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.fu
 
 libraryDependencies += "org.scalafx" %% "scalafxml-core-sfx8" % "0.2.2"
 libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.60-R9"
+libraryDependencies += "org.controlsfx" % "controlsfx" % "8.40.10"
 
 publishTo := Some(
   if (version.value endsWith "-SNAPSHOT")
