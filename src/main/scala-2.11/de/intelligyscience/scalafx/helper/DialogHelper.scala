@@ -2,13 +2,13 @@ package de.intelligyscience.scalafx.helper
 
 import org.controlsfx.dialog.CommandLinksDialog
 import org.controlsfx.dialog.CommandLinksDialog.CommandLinksButtonType
-
+import scala.collection.JavaConversions._
 import scalafx.scene.Node
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{Priority, GridPane}
+import scalafx.scene.layout.{Region, Priority, GridPane}
 import java.io.{PrintWriter, StringWriter}
 
 /**
@@ -26,6 +26,7 @@ object DialogHelper {
     if(header.nonEmpty) alert.headerText = header
     alert.contentText = text
     alert.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
+    alert.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
     alert
   }
 
@@ -78,6 +79,7 @@ object DialogHelper {
     dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
     if(header.nonEmpty) dialog.headerText = header
     dialog.contentText = content
+    dialog.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
     dialog
   }
 
@@ -91,6 +93,7 @@ object DialogHelper {
     dialog.width = 800
     dialog.height = 600
     dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
+    dialog.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
     dialog
   }
 
@@ -114,6 +117,7 @@ object DialogHelper {
     dialog.headerText = header
     dialog.contentText = contentText
     dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
+    dialog.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
     dialog
   }
 
@@ -136,7 +140,9 @@ object DialogHelper {
     )
   }
 
-  def confirmationDialog(title: String, headerText: String, contentText: String)(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+  def confirmationDialog(title: String,
+                         headerText: String,
+                         contentText: String)(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
     dialog(contentText,headerText, title, AlertType.Confirmation,titleIcon)
   }
 
@@ -164,6 +170,7 @@ object DialogHelper {
     val dialog = new CommandLinksDialog(commandLinks:_*)
     dialog.setTitle(title)
     dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
+    dialog.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
     dialog.setGraphic( graphic )
     dialog
   }
