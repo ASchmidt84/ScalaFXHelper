@@ -152,14 +152,18 @@ object DialogHelper {
 
   def creteCommandLink(headline: String,
                        longText: String,
-                       default: Boolean = false) = new CommandLinksButtonType(headline,longText,false)
+                       graphic: Option[Node],
+                       default: Boolean = false) = new CommandLinksButtonType(
+    headline,
+    longText,
+    if(graphic.isDefined) graphic.get else new ImageView(classOf[CommandLinksDialog].getResource("arrow-green-right.png").toExternalForm) ,false)
 
   def commandLinkDialog(title: String,
                         commandLinks: Seq[CommandLinksButtonType],
-                        graphic: Node)(titleIcon: String) = {
+                        graphic: Node)(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
     val dialog = new CommandLinksDialog(commandLinks:_*)
     dialog.setTitle(title)
-    if(titleIcon.nonEmpty) dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( ScalaFxHelper.getArrayOfResource(titleIcon) )
+    dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
     dialog.setGraphic( graphic )
     dialog
   }
