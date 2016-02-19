@@ -15,10 +15,10 @@ object ScalaFxHelper {
     * Looks in resoruce folder of src/main/resource with the subfolder img
     * It is necessary to create this folder. You can add more subfolder in img to sort your images
     */
-  lazy val getResourceOf = (name: String) => getClass.getResource(s"/img/$name").toURI
-  lazy val getResourceOfWithPath = (path: String) => (name: String) => getClass.getResource(s"$path$name").toURI
+  lazy val getResourceOf = (name: String) => getClass.getResourceAsStream(s"/img/$name")
+  lazy val getResourceOfWithPath = (path: String) => (name: String) => getClass.getResourceAsStream(s"$path$name")
 
-  lazy val getArrayOfResource = (name: String) => image( scala.io.Source.fromURI( getResourceOf(name) )("latin1" ).map(_.toByte).toArray )
+  lazy val getArrayOfResource = (name: String) => image( scala.io.Source.fromInputStream( getResourceOf(name) )("latin1" ).map(_.toByte).toArray )
 
   lazy val image = (data: Array[Byte]) => new Image( new ByteArrayInputStream(data) )
 
