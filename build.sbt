@@ -1,6 +1,6 @@
 name := "ScalaFXHelper"
 
-version := "1.4"
+version := "1.6"
 
 scalaVersion := "2.11.7"
 

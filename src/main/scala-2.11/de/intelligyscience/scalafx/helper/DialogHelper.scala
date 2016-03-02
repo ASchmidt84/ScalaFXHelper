@@ -2,7 +2,6 @@ package de.intelligyscience.scalafx.helper
 
 import org.controlsfx.dialog.CommandLinksDialog
 import org.controlsfx.dialog.CommandLinksDialog.CommandLinksButtonType
-import scala.collection.JavaConversions._
 import scalafx.scene.Node
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
@@ -10,6 +9,7 @@ import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{Region, Priority, GridPane}
 import java.io.{PrintWriter, StringWriter}
+import scalafx.Includes._
 
 /**
   * Created by andre on 22.01.16.
@@ -32,20 +32,20 @@ object DialogHelper {
 
   def infoDialog(text: String,
                  header: String = "",
-                 title: String = "Information")(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                 title: String = "Information")(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     dialog(text,header,title,AlertType.Information,titleIcon)
   }
 
   def errorDialog(text: String,
                   header: String = "",
-                  title: String = "Fehler")(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                  title: String = "Fehler")(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     dialog(text,header,title,AlertType.Error,titleIcon)
   }
 
   def exceptionDialog(exception: Throwable,
                       text: String,
                       header: String = "",
-                      title: String = "Ausnahmefehler")(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                      title: String = "Ausnahmefehler")(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
 
     val alert = dialog(text,header,title,AlertType.Error,titleIcon)
     val label = new Label("Error stacktrace:")
@@ -73,7 +73,7 @@ object DialogHelper {
   def inputDialog(input: String,
                   title: String,
                   content: String,
-                  header: String = "")(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                  header: String = "")(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     val dialog = new TextInputDialog(input)
     dialog.title = title
     dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
@@ -85,7 +85,7 @@ object DialogHelper {
 
   def complexDialog[A](title:String,
                        header:String,
-                       icon: ImageView)(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                       icon: ImageView)(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     val dialog = new Dialog[A]()
     dialog.title = title
     dialog.headerText = header
@@ -110,7 +110,7 @@ object DialogHelper {
   def choiceDialog[A](title: String,
                       header: String,
                       contentText: String,
-                      elems: Seq[A])(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                      elems: Seq[A])(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     val dialog = new ChoiceDialog[A]()
     dialog.items ++= elems
     dialog.title = title
@@ -130,7 +130,7 @@ object DialogHelper {
 
   def notImplementedDialog(content: String,
                            title: String = "Noch nicht implementiert",
-                           header: String = "Noch nicht implementiert")(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                           header: String = "Noch nicht implementiert")(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     dialog(
       content,
       header,
@@ -142,14 +142,14 @@ object DialogHelper {
 
   def confirmationDialog(title: String,
                          headerText: String,
-                         contentText: String)(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                         contentText: String)(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     dialog(contentText,headerText, title, AlertType.Confirmation,titleIcon)
   }
 
   def customConfirmationDialog(title:String,
                                headerText: String,
                                contentText: String,
-                               buttonSeq: Seq[ButtonType])(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                               buttonSeq: Seq[ButtonType])(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     val dialog = confirmationDialog(title,headerText,contentText)(titleIcon)
     dialog.buttonTypes.clear()
     dialog.buttonTypes ++= buttonSeq.map(_.delegate)
@@ -166,7 +166,7 @@ object DialogHelper {
 
   def commandLinkDialog(title: String,
                         commandLinks: Seq[CommandLinksButtonType],
-                        graphic: Node)(implicit titleIcon: Image = ScalaFxHelper.getArrayOfResource("fallback_logo.png")) = {
+                        graphic: Node)(implicit titleIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
     val dialog = new CommandLinksDialog(commandLinks:_*)
     dialog.setTitle(title)
     dialog.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )

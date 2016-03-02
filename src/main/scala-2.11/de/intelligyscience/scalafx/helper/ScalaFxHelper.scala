@@ -1,10 +1,12 @@
 package de.intelligyscience.scalafx.helper
 
 import java.io.ByteArrayInputStream
-
+import scalafx.Includes._
+import scala.util.Try
 import scalafx.geometry.Insets
 import scalafx.scene.control.{TextField, Label}
 import scalafx.scene.image.{ImageView, Image}
+import scalafx.scene.input.KeyEvent
 
 /**
   * Created by andre on 17.02.16.
@@ -18,15 +20,13 @@ object ScalaFxHelper {
   lazy val getResourceOf = (name: String) => getClass.getResourceAsStream(s"/img/$name")
   lazy val getResourceOfWithPath = (path: String) => (name: String) => getClass.getResourceAsStream(s"$path$name")
 
-  lazy val getArrayOfResource = (name: String) => image( scala.io.Source.fromInputStream( getResourceOf(name) )("latin1" ).map(_.toByte).toArray )
+  lazy val getImageOfResource = (name: String) => image( scala.io.Source.fromInputStream( getResourceOf(name) )("latin1" ).map(_.toByte).toArray )
+  lazy val getArrayOfResource = (name: String) => scala.io.Source.fromInputStream( getResourceOf(name) )("latin1" ).map(_.toByte).toArray
 
   lazy val image = (data: Array[Byte]) => new Image( new ByteArrayInputStream(data) )
 
   lazy val iconNode = (width:Int) => (height: Int) => (name:String) => {
-    val tmp = new ImageView( getResourceOf(name).toString )
-    tmp.fitWidth = width
-    tmp.fitHeight = height
-    tmp
+    iconByteNode(width)(height)( getArrayOfResource(name) )
   }
 
   lazy val iconByteNode = (width:Int) => (height: Int) => (data: Array[Byte]) => {
@@ -87,5 +87,23 @@ object ScalaFxHelper {
   lazy val label20 = labelSymmetric(20)(_)
   lazy val textField10 = textFieldSymmetric(10)(_)
   lazy val textField20 = textFieldSymmetric(20)(_)
+
+  lazy val numberTextField = (marginTop: Int) => (marginLeft: Int) => (marginRight: Int) => (marginBottom: Int) => (text: String) => {
+    val field = new TextField()
+    Try( field.text = text.replaceAll("[^0-9]","") )
+    field.margin = Insets(marginTop,marginLeft,marginRight,marginBottom)
+    field.onKeyReleased = (ke: KeyEvent) => {
+      Try{
+        field.text = field.text().replaceAll("[^0-9]","")
+        field.positionCaret(field.text().length)
+        field.requestFocus()
+      }
+    }
+    field
+  }
+
+  lazy val numberTextFieldSymmetric = (insets: Int) => numberTextField(insets)(insets)(insets)(insets)(_)
+  lazy val numberTextField10 = numberTextFieldSymmetric(10)(_)
+  lazy val numberTextField20 = numberTextFieldSymmetric(20)(_)
 
 }
