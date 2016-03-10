@@ -106,4 +106,22 @@ object ScalaFxHelper {
   lazy val numberTextField10 = numberTextFieldSymmetric(10)(_)
   lazy val numberTextField20 = numberTextFieldSymmetric(20)(_)
 
+  lazy val doubleTextField = (marginTop: Int) => (marginLeft: Int) => (marginRight: Int) => (marginBottom: Int) => (text: String) => {
+    val field = new TextField()
+    Try( field.text = text.replaceAll("[^0-9,]","") )
+    field.margin = Insets(marginTop,marginLeft,marginRight,marginBottom)
+    field.onKeyReleased = (ke: KeyEvent) => {
+      Try{
+        field.text = field.text().replaceAll("[^0-9,]","")
+        field.positionCaret(field.text().length)
+        field.requestFocus()
+      }
+    }
+    field
+  }
+
+  lazy val doubleTextFieldSymmetric = (insets: Int) => doubleTextField(insets)(insets)(insets)(insets)(_)
+  lazy val doubleTextField10 = doubleTextFieldSymmetric(10)(_)
+  lazy val doubleTextField20 = doubleTextFieldSymmetric(20)(_)
+
 }
