@@ -1,19 +1,17 @@
 name := "ScalaFXHelper"
 
-version := "1.7"
+version := "1.8"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 organization := "de.intelligyscience"
 
 organizationName := "Intelligy Science UG (haftungsbeschränkt)"
 
-scalaVersion := "2.11.7"
-
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
 
 libraryDependencies += "org.scalafx" %% "scalafxml-core-sfx8" % "0.2.2"
-libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.60-R9"
+libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.92-R10"
 libraryDependencies += "org.controlsfx" % "controlsfx" % "8.40.10"
 
 publishTo := Some(
@@ -47,10 +45,9 @@ scmInfo := Some(ScmInfo(
   Some("scm:git:git@github.com:IntelligyScience/ScalaFXHelper.git")
 ))
 
-credentials += Credentials(Path.userHome / ".sbt" / ".isCredentials")
 
 publishTo := {
-  val nexus = "http://46.4.103.179:8888/nexus/content/repositories/"
+  val nexus = "http://nexus.intelligyscience.de/content/repositories/"
   if (isSnapshot.value)
     Some("snapshots" at nexus + "snapshots/")
   else
