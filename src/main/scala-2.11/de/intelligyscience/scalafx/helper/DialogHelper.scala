@@ -2,14 +2,20 @@ package de.intelligyscience.scalafx.helper
 
 import org.controlsfx.dialog.CommandLinksDialog
 import org.controlsfx.dialog.CommandLinksDialog.CommandLinksButtonType
+
 import scalafx.scene.Node
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{Region, Priority, GridPane}
+import scalafx.scene.layout.{GridPane, Priority, Region}
 import java.io.{PrintWriter, StringWriter}
+
 import scalafx.Includes._
+import scalafx.scene.effect.{DropShadow, InnerShadow}
+import scalafx.scene.paint.Color
+import scalafx.scene.text.{Font, FontWeight, Text, TextFlow}
+import scalafx.stage.Modality
 
 /**
   * Created by andre on 22.01.16.
@@ -27,6 +33,67 @@ object DialogHelper {
     alert.contentText = text
     alert.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( titleIcon )
     alert.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
+    alert
+  }
+
+  def textFlowDialog(dialogTitle: String,
+                     headerSeq: Seq[Text],
+                     textSeq: Seq[Text],
+                     alertType: AlertType,
+                     dialogIcon: Image) = {
+    val alert = new Alert(alertType){
+      initModality(Modality.ApplicationModal)
+    }
+    alert.delegate.getDialogPane.getScene.getWindow.asInstanceOf[javafx.stage.Stage].getIcons.add( dialogIcon )
+    alert.title = dialogTitle
+    if(headerSeq.nonEmpty) alert.dialogPane().header = new TextFlow(headerSeq:_*)
+    alert.dialogPane().content = new TextFlow(textSeq:_*)
+    alert.getDialogPane.getChildren.filter(_.isInstanceOf[javafx.scene.control.Label]).foreach(_.asInstanceOf[javafx.scene.control.Label].setMinHeight(Region.USE_PREF_SIZE))
+    alert
+  }
+
+  def textFlowInfoDialog(dialogTitle: String,
+                         headerSeq: Seq[Text],
+                         textSeq: Seq[Text])(implicit dialogIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
+    textFlowDialog(dialogTitle,headerSeq,textSeq,AlertType.Information,dialogIcon)
+  }
+
+  def textFlowErrorDialog(dialogTitle: String,
+                          headerSeq: Seq[Text],
+                          textSeq: Seq[Text])(implicit dialogIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
+    textFlowDialog(dialogTitle,headerSeq,textSeq,AlertType.Error,dialogIcon)
+  }
+
+  def textFlowExceptionDialog(exception: Throwable,
+                              dialogTitle: String,
+                              headerSeq: Seq[Text],
+                              textSeq: Seq[Text],
+                              labelStackTraceText: Seq[Text] = Seq( new Text("Error Stacktrace:"){
+                                this.fill = Color.Red
+                                this.font = Font("",FontWeight.Bold,16)
+                                effect = new DropShadow(){
+                                  offsetY = 4.0
+                                  color = Color.color(0.4,0.4,0.4)
+                                }
+                              } ) )(implicit dialogIcon: Image = ScalaFxHelper.getImageOfResource("fallback_logo.png")) = {
+    val alert = textFlowDialog(dialogTitle,headerSeq,textSeq,AlertType.Error,dialogIcon)
+    val sw = new StringWriter()
+    val pw = new PrintWriter(sw)
+    exception.printStackTrace(pw)
+
+    val textArea = new TextArea(sw.toString)
+    textArea.editable = false
+    textArea.wrapText = true
+    textArea.maxWidth = Double.MaxValue
+    textArea.maxHeight = Double.MaxValue
+    GridPane.setVgrow(textArea,Priority.Always)
+    GridPane.setHgrow(textArea,Priority.Always)
+    val expContent = new GridPane()
+    expContent.add(new TextFlow(labelStackTraceText:_*),0,0)
+    expContent.add(textArea,0,1)
+    expContent.maxWidth = Double.MaxValue
+    alert.dialogPane().setExpandableContent(textArea)
+    alert.dialogPane().setExpanded(true)
     alert
   }
 
