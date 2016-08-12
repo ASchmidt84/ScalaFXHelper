@@ -1,6 +1,6 @@
 name := "ScalaFXHelper"
 
-version := "1.8"
+version := "1.9"
 
 scalaVersion := "2.11.8"
 
@@ -37,7 +37,7 @@ publishMavenStyle := true
 publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
-homepage := Some(url("https://github.com/IntelligyScience/PlayPayPalIntegration"))
+homepage := Some(url("https://github.com/IntelligyScience/ScalaFXHelper"))
 
 scmInfo := Some(ScmInfo(
   url("https://github.com/IntelligyScience/ScalaFXHelper"),
