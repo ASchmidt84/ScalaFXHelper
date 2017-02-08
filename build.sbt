@@ -1,18 +1,17 @@
 name := "ScalaFXHelper"
 
-version := "1.11"
+version := "1.13"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.1"
 
-organization := "de.intelligyscience"
+crossScalaVersions := Seq("2.11.8","2.12.0")
 
-organizationName := "Intelligy Science UG (haftungsbeschränkt)"
+organization := "de.scalamat"
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+organizationName := "Scalamat UG (haftungsbeschränkt)"
 
-libraryDependencies += "org.scalafx" %% "scalafxml-core-sfx8" % "0.2.2"
-libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.92-R10"
-libraryDependencies += "org.controlsfx" % "controlsfx" % "8.40.10"
+libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.102-R11"
+libraryDependencies += "org.controlsfx" % "controlsfx" % "8.40.12"
 
 publishTo := Some(
   if (version.value endsWith "-SNAPSHOT")

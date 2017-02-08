@@ -1,4 +1,4 @@
-package de.intelligyscience.scalafx.helper
+package de.scalamat.scalafx.helper
 
 import java.io.ByteArrayInputStream
 import scalafx.Includes._

@@ -1,4 +1,4 @@
-package de.intelligyscience.scalafx.helper
+package de.scalamat.scalafx.helper
 
 import java.util.function.Consumer
 
